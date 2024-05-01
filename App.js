@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CarCard from './CarCard'
 
 const Cars=[
@@ -76,7 +76,30 @@ const Cars=[
 
 
 function App() {
-  const bikes = Cars.map((carObj)=>{
+
+  const [order,setSortOrder] = useState("default")
+  const [carInfo,setcarInfo] = useState(Cars)
+
+  function handleSelectedChange(event){
+    SortData(carInfo,event.target.value)
+    setSortOrder(event.target.value)
+   }
+  
+  function SortData(carInfo,order){
+    if (order === "Low to High") {
+      setcarInfo(carInfo.sort((a, b) => a.Price - b.Price));
+    } 
+    else if (order === "High to Low") {
+      setcarInfo(carInfo.sort((a, b) => b.Price - a.Price));
+    } 
+    else {
+      setcarInfo(Cars);
+    }
+
+  }
+
+  
+  const cards = carInfo.map((carObj)=>{
     return (<CarCard key = {carObj.id} ImageURL = {carObj.ImageURL} Name = {carObj.Name} Year = {carObj.Year} Price={carObj.Price} Power = {carObj.Power} Torque = {carObj.Torque}/>
   )});
   return (
@@ -85,7 +108,13 @@ function App() {
         Dream Cart
       </header>
       <main>
-        {bikes}
+        <p>Price</p>
+        <select value ={order} onChange={handleSelectedChange}>
+          <option value="default">default</option>
+          <option value="High to Low">High to Low</option>
+          <option value="Low to High">Low to High</option>
+        </select>
+        <>{cards}</>
       </main>
     </div>
   )
