@@ -2,7 +2,6 @@ import React from "react";
 
 
 function CarCard({ImageURL, Name, Year, Price, Power, Torque}){
-    console.log(Name)
 
     return(
             <div className = "card">
