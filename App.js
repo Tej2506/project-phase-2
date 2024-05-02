@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import CarCard from './CarCard'
+import Form from './Form';
+import RenderCars from "./RenderCars";
+
 
 const Cars=[
   {
@@ -40,7 +42,7 @@ const Cars=[
     "Power": 355,
     "Torque": 500,
     "Engine": "B9, 3 Liter Turbocharged I6",
-    "ImageURL": "https://www.netcarshow.com/BMW-X3_M40i-2018-1280-01.jpg"
+    "ImageURL": "https://images.carexpert.com.au/resize/3000/-/app/uploads/2022/05/220503_BMW-X3-M40i_Still-42.jpg"
   },
   {
     "id": 5,
@@ -81,40 +83,38 @@ function App() {
   const [carInfo,setcarInfo] = useState(Cars)
 
   function handleSelectedChange(event){
-    SortData(carInfo,event.target.value)
     setSortOrder(event.target.value)
-   }
+    SortData(carInfo,(event.target.value))
+  }
   
   function SortData(carInfo,order){
-    if (order === "Low to High") {
-      setcarInfo(carInfo.sort((a, b) => a.Price - b.Price));
+    if (order === "default") {
+      window.location.reload()
     } 
     else if (order === "High to Low") {
       setcarInfo(carInfo.sort((a, b) => b.Price - a.Price));
     } 
     else {
-      setcarInfo(Cars);
+      setcarInfo(carInfo.sort((a, b) => a.Price - b.Price));
     }
 
   }
 
-  
-  const cards = carInfo.map((carObj)=>{
-    return (<CarCard key = {carObj.id} ImageURL = {carObj.ImageURL} Name = {carObj.Name} Year = {carObj.Year} Price={carObj.Price} Power = {carObj.Power} Torque = {carObj.Torque}/>
-  )});
+
   return (
     <div className="App">
       <header>
         Dream Cart
       </header>
       <main>
-        <p>Price</p>
+        <p>Price</p> 
         <select value ={order} onChange={handleSelectedChange}>
           <option value="default">default</option>
           <option value="High to Low">High to Low</option>
           <option value="Low to High">Low to High</option>
         </select>
-        <>{cards}</>
+        <Form carInfo={carInfo} setcarInfo={setcarInfo}/>
+        <RenderCars cars={carInfo}/>
       </main>
     </div>
   )
