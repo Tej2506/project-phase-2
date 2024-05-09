@@ -11,12 +11,25 @@ function Form({carInfo,setcarInfo}){
     const[carTorque, setTorque]= useState((""))
     const[carYear, setYear]= useState((""))
 
+    function UploadCarData(carObj){
+        fetch("http://localhost:3000/Cars",{
+            method:'POST',
+            headers:{
+                'Content-Type':"application/json"
+            },
+            body: JSON.stringify(carObj)
+        })
+        .then(res => res.json())
+        .then(car => console.log(car))
+    }
+
 
     function handleSubmit(event){
         event.preventDefault()
         console.log(event.target.name.value)
         let newCar = {"Name": carName, "ImageURL": ImageURL, "Year":carYear, "Price":carPrice, "Power":carPower, "Torque":carTorque }
         setcarInfo([...carInfo, newCar])
+        UploadCarData(newCar)
         setName("")
         setImageURL("")
         setYear("")
