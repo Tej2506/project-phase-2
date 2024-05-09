@@ -1,7 +1,8 @@
 import React from "react";
+import DeleteCar from "./Button";
 
 
-function CarCard({ImageURL, Name, Year, Price, Power, Torque}){
+function CarCard({id, ImageURL, Name, Year, Price, Power, Torque, setcarInfo, car, allCars }){
 
     return(
             <div className = "card">
@@ -16,7 +17,8 @@ function CarCard({ImageURL, Name, Year, Price, Power, Torque}){
                      </>
                      
                  }
-             </ul>
+             </ul> 
+             <DeleteCar id = {id} allCars={allCars} setcarInfo={setcarInfo}/>
             </div>   
          )
 } 
