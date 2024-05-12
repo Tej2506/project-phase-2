@@ -10,6 +10,7 @@ function Form({carInfo,setcarInfo}){
     const[carPower, setPower]= useState((""))
     const[carTorque, setTorque]= useState((""))
     const[carYear, setYear]= useState((""))
+    const[Owned, setOwned]=  useState("")
 
     function UploadCarData(carObj){
         fetch("http://localhost:3000/Cars",{
@@ -27,7 +28,7 @@ function Form({carInfo,setcarInfo}){
     function handleSubmit(event){
         event.preventDefault()
         console.log(event.target.name.value)
-        let newCar = {"Name": carName, "ImageURL": ImageURL, "Year":carYear, "Price":carPrice, "Power":carPower, "Torque":carTorque }
+        let newCar = {"Name": carName, "ImageURL": ImageURL, "Year":carYear, "Price":carPrice, "Power":carPower, "Torque":carTorque, "Owned":Owned}
         setcarInfo([...carInfo, newCar])
         UploadCarData(newCar)
         setName("")
@@ -36,6 +37,7 @@ function Form({carInfo,setcarInfo}){
         setPower("")
         setPrice("")
         setTorque("")
+        setOwned(false)
 
     
     }
@@ -58,6 +60,9 @@ function Form({carInfo,setcarInfo}){
         else if(event.target.id==="carYear") {
             setYear(event.target.value)
         }
+        else if(event.target.id==="Owned") {
+            setOwned(!Owned)
+        }
 
     }
     
@@ -76,6 +81,8 @@ function Form({carInfo,setcarInfo}){
             <input type="text" id="carPower" value={carPower} onChange={handleChange}/>
             <label htmlFor="carTorque">Torque</label>
             <input type="text" id="carTorque" value={carTorque} onChange={handleChange}/>
+            <label htmlFor="Owned">Owned</label>
+            <input type="checkbox" id="Owned" checked={Owned} onChange={handleChange}/>
             <input type="submit" value="Submit Car Details"/>
         </form>
     )
