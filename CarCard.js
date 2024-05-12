@@ -38,11 +38,6 @@ function CarCard({id, ImageURL, Name, Year, Price, Power, Torque, Owned, setcarI
   
     }
     
-        
-
-
-   
-
     return(
             <div className = "card">
              <h1>{Name} {Year}</h1>
