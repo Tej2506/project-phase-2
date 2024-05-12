@@ -92,9 +92,7 @@ function App() {
         return res.json();
     })
     .then(carData => {
-        console.log(carData);
-        setcarInfo(carData)
-        
+        setcarInfo(carData)   
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -140,7 +138,7 @@ FetchData(setcarInfo)
           <option value="Low to High">Low to High</option>
         </select>
         <Form carInfo={carInfo} setcarInfo={setcarInfo}/>
-        <RenderCars allCars={carInfo} setcarInfo={setcarInfo}/>
+        <RenderCars allCars={carInfo} setcarInfo={setcarInfo} />
       </main>
     </div>
   )
