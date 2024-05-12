@@ -16,9 +16,9 @@ function RenderCars({ allCars,setcarInfo }) {
                     Price={carObj.Price}
                     Power={carObj.Power}
                     Torque={carObj.Torque}
+                    Owned = {carObj.Owned}
                     setcarInfo={setcarInfo}
-                    car = {carObj}
-                    allCars = {allCars}
+                    allCars={allCars}
 
                 />
                 
